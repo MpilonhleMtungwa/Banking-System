@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a href="index.html">Home</a>
+      <a href="customer.html">View Customers</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <span style="font-size: 30px; cursor: pointer" onclick="openNav()"
+      >&#9776;</span
+    >
+
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <h3>Withdraw</h3>
+          <p>R Some text</p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <h3>Balance</h3>
+          <div id="balance">R Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <div class="container">
+        <h1>Banking System</h1>
+
+        <div id="account">
+          <h2>Account</h2>
+          <div id="accountInfo"></div>
+          <h3>Transfer Funds</h3>
+          <form id="transferForm">
+            <label for="recipientName">Recipient Account:</label>
+            <input
+              list="recipients"
+              id="recipientName"
+              name="recipientName"
+              required
+            />
+            <datalist id="recipients">
+              <!-- Options will be dynamically generated -->
+            </datalist>
+            <input type="number" id="amount" placeholder="Amount" required />
+            <button type="submit">Transfer</button>
+          </form>
+          <div id="transferStatus"></div>
+        </div>
+      </div>
+
+      <div class="transactions">
+        <h2>Recent Transactions</h2>
+        <ul id="transaction-list">
+          <!-- Transactions will be dynamically inserted here -->
+        </ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="transactions.js"></script>
+    <script src="displaytrc.js"></script>
+    <script src="ui.js"></script>
+  </body>
+</html>

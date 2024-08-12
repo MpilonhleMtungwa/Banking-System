@@ -44,6 +44,80 @@ function myFunction() {
   }
 }
 
+function openTransferForm(customerName) {
+  document.getElementById(
+    "customerName"
+  ).textContent = `Transfer Funds for ${customerName}`;
+  document.getElementById("transferForm").style.display = "block";
+}
+
+// Function to close the transfer form
+function closeTransferForm() {
+  document.getElementById("transferForm").style.display = "none";
+}
+
+// Form submission event listener
+document
+  .querySelector(".form-container")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const customerName = document
+      .getElementById("customerName")
+      .textContent.split(" for ")[1];
+    const amount = document.querySelector("input[name='amount']").value;
+
+    fetch("http://localhost:3000/api/transfer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ recipientName: customerName, amount: amount }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Transfer failed");
+        }
+        return response.text();
+      })
+      .then((message) => {
+        alert(message);
+
+        // Refresh balance and transactions
+        fetch("http://localhost:3000/api/user-balance")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(
+              "balance"
+            ).textContent = `R ${data.balance}`;
+          })
+          .catch((error) =>
+            console.error("Error fetching user balance:", error)
+          );
+
+        fetch("http://localhost:3000/api/transactions")
+          .then((response) => response.json())
+          .then((data) => {
+            const transactionsList =
+              document.querySelector("#transaction-list");
+            transactionsList.innerHTML = ""; // Clear existing list
+            const limitedData = data.slice(0, 5); // Show only the last 5 transactions
+            limitedData.forEach((transaction) => {
+              const listItem = document.createElement("li");
+              listItem.textContent = `${transaction.transaction_date}: ${transaction.recipient} received R${transaction.amount}`;
+              transactionsList.appendChild(listItem);
+            });
+          })
+          .catch((error) =>
+            console.error("Error fetching transactions:", error)
+          );
+
+        // Close the pop-up form
+        closeTransferForm();
+      })
+      .catch((error) => console.error("Error:", error));
+  });
+
 /*
 document
   .getElementById("transferForm")

@@ -44,18 +44,32 @@ function myFunction() {
   }
 }
 
-fetch("http://localhost:3000/api/customers")
-  .then((response) => response.json())
-  .then((data) => {
-    const datalist = document.querySelector("#recipients");
-    data.forEach((customer) => {
-      const option = document.createElement("option");
-      option.value = customer.name; // Use customer name for the value
-      datalist.appendChild(option);
-    });
-  })
-  .catch((error) => console.error("Error fetching customer names:", error));
+/*
+document
+  .getElementById("transferForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
 
+    const recipientName = document.getElementById("recipientName").value;
+    const amount = document.getElementById("amount").value;
+
+    fetch("http://localhost:3000/api/transfer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ recipientName, amount }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Transfer failed");
+        }
+        return response.text();
+      })
+      .then((message) => alert(message))
+      .catch((error) => console.error("Error:", error));
+  });
+*/
 /*
 function openForm(name) {
   // Logic to open the pop-up form and populate it with the relevant data

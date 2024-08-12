@@ -8,6 +8,20 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Fetch user balance
+app.get("/api/user-balance", (req, res) => {
+  connection.query(
+    "SELECT balance FROM user_balance WHERE id = 1",
+    (err, results) => {
+      if (err) {
+        res.status(500).send("Error fetching user balance");
+        return;
+      }
+      res.json(results[0]);
+    }
+  );
+});
+
 app.get("/api/customers", (req, res) => {
   connection.query("SELECT * FROM customers", (err, results) => {
     if (err) {
@@ -24,27 +38,158 @@ app.get("/api/customers", (req, res) => {
   });
 });
 
-// Get user balance
-app.get("/api/user-balance", (req, res) => {
+app.post("/api/transfer", (req, res) => {
+  const { recipientName, amount } = req.body;
+
+  // Start transaction
+  connection.beginTransaction((err) => {
+    if (err) throw err;
+
+    // Check user balance
+    connection.query(
+      "SELECT balance FROM user_balance WHERE id = 1",
+      (err, results) => {
+        if (err) {
+          return connection.rollback(() => {
+            res.status(500).send("Error fetching user balance");
+          });
+        }
+
+        const userBalance = results[0].balance;
+
+        if (userBalance < amount) {
+          return connection.rollback(() => {
+            res.status(400).send("Insufficient funds");
+          });
+        }
+
+        // Deduct from user balance
+        connection.query(
+          "UPDATE user_balance SET balance = balance - ? WHERE id = 1",
+          [amount],
+          (err) => {
+            if (err) {
+              return connection.rollback(() => {
+                res.status(500).send("Error updating user balance");
+              });
+            }
+
+            // Find the recipient by name and update their balance
+            connection.query(
+              "SELECT id, balance FROM customers WHERE name = ?",
+              [recipientName],
+              (err, results) => {
+                if (err) {
+                  return connection.rollback(() => {
+                    res.status(500).send("Error querying the database");
+                  });
+                }
+
+                if (results.length === 0) {
+                  return connection.rollback(() => {
+                    res.status(404).send("Recipient not found");
+                  });
+                }
+
+                const recipientId = results[0].id;
+                const newBalance = results[0].balance + parseFloat(amount);
+
+                connection.query(
+                  "UPDATE customers SET balance = ? WHERE id = ?",
+                  [newBalance, recipientId],
+                  (err) => {
+                    if (err) {
+                      return connection.rollback(() => {
+                        res.status(500).send("Error updating customer balance");
+                      });
+                    }
+
+                    // Insert transaction record with the correct customer_id
+                    connection.query(
+                      "INSERT INTO transactions (customer_id, recipient, amount) VALUES (?, ?, ?)",
+                      [recipientId, recipientName, amount],
+                      (err) => {
+                        if (err) {
+                          return connection.rollback(() => {
+                            res.status(500).send("Error inserting transaction");
+                          });
+                        }
+
+                        // Commit transaction
+                        connection.commit((err) => {
+                          if (err) {
+                            return connection.rollback(() => {
+                              res.status(500).send("Transaction failed");
+                            });
+                          }
+                          res.send("Transfer successful");
+                        });
+                      }
+                    );
+                  }
+                );
+              }
+            );
+          }
+        );
+      }
+    );
+  });
+});
+
+// Fetch recent transactions
+app.get("/api/transactions", (req, res) => {
   connection.query(
-    "SELECT balance FROM user_balance WHERE id = 1",
+    "SELECT * FROM transactions ORDER BY transaction_date DESC LIMIT 10",
     (err, results) => {
       if (err) {
-        res.status(500).send("Error fetching user balance");
+        res
+          .status(500)
+          .send("Error querying the database for recent transactions");
         return;
       }
-      res.json(results[0]);
+      res.json(results);
     }
   );
 });
 
-app.post("/api/transfer", (req, res) => {
-  const { recipientName, amount } = req.body;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+/*
+const express = require("express");
+const connection = require("./db");
+const cors = require("cors");
 
-  // Find the recipient by name
+const app = express();
+const PORT = 3000;
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/api/customers", (req, res) => {
+  connection.query("SELECT * FROM customers", (err, results) => {
+    if (err) {
+      res.status(500).send("Error querying the database");
+      return;
+    }
+
+    // Add the Transfer button to each customer
+    results.forEach((customer) => {
+      customer.transferButton = `<button onclick="openTransferForm('${customer.name}')">Transfer</button>`;
+    });
+
+    res.json(results);
+  });
+});
+
+app.post("/api/transfer", (req, res) => {
+  const { recipientId, amount } = req.body;
+
+  // Find the recipient by ID
   connection.query(
-    "SELECT id, balance FROM customers WHERE name = ?",
-    [recipientName],
+    "SELECT balance FROM customers WHERE id = ?",
+    [recipientId],
     (err, results) => {
       if (err) {
         res.status(500).send("Error querying the database");
@@ -56,7 +201,6 @@ app.post("/api/transfer", (req, res) => {
         return;
       }
 
-      const recipientId = results[0].id;
       const recipientBalance = results[0].balance;
 
       // Update the recipient's balance
@@ -64,7 +208,7 @@ app.post("/api/transfer", (req, res) => {
       connection.query(
         "UPDATE customers SET balance = ? WHERE id = ?",
         [newBalance, recipientId],
-        (err, results) => {
+        (err, updateResults) => {
           if (err) {
             res.status(500).send("Error updating balance");
             return;
@@ -77,6 +221,10 @@ app.post("/api/transfer", (req, res) => {
   );
 });
 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+*/
 // Transfer funds
 /*
 app.post("/api/transfer", (req, res) => {
@@ -158,6 +306,7 @@ app.post("/api/transfer", (req, res) => {
 });
 */
 
+/*
 app.get("/api/transactions", (req, res) => {
   const query =
     "SELECT * FROM transactions ORDER BY transaction_date DESC LIMIT 10";
@@ -170,6 +319,5 @@ app.get("/api/transactions", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+
+*/

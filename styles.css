@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #0a8cd8af;
+  color: white;
   margin: 0;
   padding: 0;
   margin-left: 80px;
@@ -91,7 +92,8 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
-  background-color: #f1f1f1;
+  background-color: #f8f8fa;
+  color: #111;
 }
 
 .main-container {
@@ -106,14 +108,20 @@ body {
   max-width: 500px;
   margin-left: 40px;
   margin-right: 30px; /* Reduced margin to bring the elements closer */
-  border: 1px solid #ccc;
-  padding: 20px;
+  border: 2px;
+  border-radius: 12px;
+  background-color: whitesmoke;
+  color: #111;
+  padding: 16px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .transactions {
   width: 40%;
-  border: 1px solid #ccc;
+  border: 2px;
+  border-radius: 12px;
+  background-color: #f1f1f1;
+  color: #111;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -128,7 +136,8 @@ body {
 }
 
 .transactions li {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
+  color: #111;
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ddd;
@@ -146,7 +155,7 @@ form input {
 form button {
   padding: 10px;
   font-size: 16px;
-  background-color: #4caf50;
+  background-color: #3473e9;
   color: white;
   border: none;
   cursor: pointer;
@@ -248,7 +257,10 @@ button:hover {
 #customerTable {
   border-collapse: collapse; /* Collapse borders */
   width: 70%; /* Full-width */
-  border: 1px solid #ddd; /* Add a grey border */
+  border: 2px; /* Add a grey border */
+  background-color: whitesmoke;
+  color: #111;
+  border-radius: 12px;
   font-size: 18px; /* Increase font-size */
 }
 
@@ -288,19 +300,23 @@ button:hover {
   position: fixed;
   bottom: 20%;
   right: 35%;
-  border: 3px solid #f1f1f1;
+  color: #111;
+  border: 2px;
+  border-radius: 12px;
   z-index: 9;
 }
 
 .form-container {
   max-width: 400px;
   padding: 20px;
+  border-radius: 12px;
   background-color: white;
 }
 
 .form-container input[type="text"] {
   width: 90%;
   padding: 10px;
+  border-radius: 12px;
 
   margin: 10px 0 20px 0;
   border: 1px solid #ccc;

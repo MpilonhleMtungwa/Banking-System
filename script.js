@@ -44,6 +44,18 @@ function myFunction() {
   }
 }
 
+fetch("http://localhost:3000/api/customers")
+  .then((response) => response.json())
+  .then((data) => {
+    const datalist = document.querySelector("#recipients");
+    data.forEach((customer) => {
+      const option = document.createElement("option");
+      option.value = customer.name; // Use customer name for the value
+      datalist.appendChild(option);
+    });
+  })
+  .catch((error) => console.error("Error fetching customer names:", error));
+
 function openTransferForm(customerName) {
   document.getElementById(
     "customerName"

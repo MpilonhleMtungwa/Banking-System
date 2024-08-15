@@ -96,6 +96,16 @@ body {
   color: #111;
 }
 
+#withdraw .amount {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#balancec {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .main-container {
   display: flex;
   width: 100%;
@@ -164,84 +174,6 @@ form button {
 form button:hover {
   background-color: #45a049;
 }
-
-/* customer css */
-
-/*
-.containercus {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-}
-
-.customer-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.customer {
-  margin-bottom: 20px;
-}
-
-button {
-  margin-left: 10px;
-  background-color: #6a5acd;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #483d8b;
-}
-
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 20%;
-  right: 35%;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-.form-container {
-  max-width: 300px;
-  padding: 20px;
-  background-color: white;
-}
-
-.form-container input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0 20px 0;
-  border: 1px solid #ccc;
-  background: #f1f1f1;
-}
-
-.form-container .btn {
-  background-color: #6a5acd;
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  opacity: 0.8;
-}
-
-.form-container .cancel {
-  background-color: red;
-}
-
-.form-container .btn:hover,
-.open-button:hover {
-  opacity: 1;
-}
-*/
 
 #myInput {
   background-image: url("/css/searchicon.png"); /* Add a search icon to input */

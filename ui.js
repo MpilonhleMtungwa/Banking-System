@@ -58,6 +58,7 @@ document
       .catch((error) => console.error("Error:", error));
   });
 
+/* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
   fetch("http://localhost:3000/api/lastWithdrawal")
     .then((response) => {
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error:", error));
 });
 
+/* Fetch the user balance and display on Balance Card*/
 fetch("http://localhost:3000/api/user-balance")
   .then((response) => response.json())
   .then((data) => {
@@ -81,6 +83,38 @@ fetch("http://localhost:3000/api/user-balance")
   })
   .catch((error) => console.error("Error fetching user balance:", error));
 
+/* Transaction list and show only 5 */
+fetch("http://localhost:3000/api/transactions")
+  .then((response) => response.json())
+  .then((data) => {
+    const transactionsList = document.querySelector("#transaction-list");
+    transactionsList.innerHTML = ""; // Clear existing list
+
+    // Limit to the most recent 5 transactions
+    const limitedData = data.slice(0, 5);
+
+    limitedData.forEach((transaction) => {
+      const listItem = document.createElement("li");
+
+      const dateSpan = document.createElement("span");
+      dateSpan.className = "transaction-date";
+      dateSpan.textContent = new Date(
+        transaction.transaction_date
+      ).toLocaleString();
+
+      const detailsSpan = document.createElement("span");
+      detailsSpan.className = "transaction-details";
+      detailsSpan.textContent = `${transaction.recipient} received R${transaction.amount}`;
+
+      listItem.appendChild(dateSpan);
+      listItem.appendChild(detailsSpan);
+      transactionsList.appendChild(listItem);
+    });
+  })
+  .catch((error) =>
+    console.error("Error fetching updated transactions:", error)
+  );
+/*
 fetch("http://localhost:3000/api/transactions")
   .then((response) => response.json())
   .then((data) => {
@@ -97,5 +131,6 @@ fetch("http://localhost:3000/api/transactions")
     });
   })
   .catch((error) => console.error("Error fetching transactions:", error));
+*/
 
 setInterval(updateBalanceAndTransactions, 30000);

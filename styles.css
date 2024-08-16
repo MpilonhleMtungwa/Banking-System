@@ -126,6 +126,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Transaction Style*/
 .transactions {
   width: 40%;
   border: 2px;
@@ -136,23 +137,42 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.transactions h2 {
-  margin-top: 0;
-}
-
-.transactions ul {
+#transaction-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-.transactions li {
+#transaction-list li {
   background-color: #ffffff;
-  color: #111;
-  margin: 10px 0;
+  border-radius: 5px;
+  margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+#transaction-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-date {
+  font-size: 14px;
+  color: #888;
+}
+
+.transaction-details {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+/*Transaction end*/
+
+/* Form style*/
 form input {
   display: block;
   width: 90%;
@@ -176,7 +196,7 @@ form button:hover {
 }
 
 #myInput {
-  background-image: url("/css/searchicon.png"); /* Add a search icon to input */
+  background-image: url(images/icons8-search-30.png); /* Add a search icon to input */
   background-position: 10px 12px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
   width: 50%; /* Full-width */
@@ -274,3 +294,4 @@ button:hover {
 .open-button:hover {
   opacity: 1;
 }
+/* Form End*/

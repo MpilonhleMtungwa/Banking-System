@@ -44,7 +44,11 @@ function myFunction() {
   }
 }
 
-fetch("https://banking-system-eta.vercel.app/api/customers")
+fetch("https://banking-system-eta.vercel.app/api/customers", {
+  headers: {
+    Accept: "application/json",
+  },
+})
   .then((response) => response.json())
   .then((data) => {
     const datalist = document.querySelector("#recipients");
@@ -96,7 +100,11 @@ document
         alert(message);
 
         // Refresh balance and transactions
-        fetch("https://banking-system-eta.vercel.app/api/user-balance")
+        fetch("https://banking-system-eta.vercel.app/api/user-balance", {
+          headers: {
+            Accept: "application/json",
+          },
+        })
           .then((response) => response.json())
           .then((data) => {
             document.getElementById(
@@ -107,7 +115,11 @@ document
             console.error("Error fetching user balance:", error)
           );
 
-        fetch("https://banking-system-eta.vercel.app/api/transactions")
+        fetch("https://banking-system-eta.vercel.app/api/transactions", {
+          headers: {
+            Accept: "application/json",
+          },
+        })
           .then((response) => response.json())
           .then((data) => {
             const transactionsList =

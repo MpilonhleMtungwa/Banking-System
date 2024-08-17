@@ -1,11 +1,17 @@
 const express = require("express");
 const connection = require("./db");
 const cors = require("cors");
+const corsOptions = {
+  origin: "https://banking-system-1ywz75wit-mpilonhle-s-projects.vercel.app/", // Replace with your front-end URL
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // if you need to send cookies or auth headers
+  optionsSuccessStatus: 204,
+};
 
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Fetch user balance

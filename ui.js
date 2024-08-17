@@ -1,7 +1,7 @@
 // Handle transfer form submission
 function updateBalanceAndTransactions() {
   fetch(
-    "https://banking-system-git-master-mpilonhle-s-projects.vercel.com/api/getBalanceAndTransactions"
+    "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/getBalanceAndTransactions"
   )
     .then((response) => {
       if (!response.ok) {
@@ -35,7 +35,7 @@ document
     const amount = document.getElementById("amount").value;
 
     fetch(
-      "https://banking-system-git-master-mpilonhle-s-projects.vercel.com/api/transfer",
+      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transfer",
       {
         method: "POST",
         headers: {
@@ -66,7 +66,7 @@ document
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
   fetch(
-    "https://banking-system-git-master-mpilonhle-s-projects.vercel.com/api/lastWithdrawal"
+    "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/lastWithdrawal"
   )
     .then((response) => {
       if (!response.ok) {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* Fetch the user balance and display on Balance Card*/
 fetch(
-  "https://banking-system-git-master-mpilonhle-s-projects.vercel.com/api/user-balance"
+  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/user-balance"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -94,7 +94,7 @@ fetch(
 
 /* Transaction list and show only 5 */
 fetch(
-  "https://banking-system-git-master-mpilonhle-s-projects.vercel.com/api/transactions"
+  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transactions"
 )
   .then((response) => response.json())
   .then((data) => {

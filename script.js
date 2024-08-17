@@ -44,11 +44,7 @@ function myFunction() {
   }
 }
 
-fetch("/api/customers", {
-  headers: {
-    Accept: "application/json",
-  },
-})
+fetch("/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const datalist = document.querySelector("#recipients");
@@ -100,11 +96,7 @@ document
         alert(message);
 
         // Refresh balance and transactions
-        fetch("/api/user-balance", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        fetch("/api/user-balance")
           .then((response) => response.json())
           .then((data) => {
             document.getElementById(
@@ -115,11 +107,7 @@ document
             console.error("Error fetching user balance:", error)
           );
 
-        fetch("/api/transactions", {
-          headers: {
-            Accept: "application/json",
-          },
-        })
+        fetch("/api/transactions")
           .then((response) => response.json())
           .then((data) => {
             const transactionsList =

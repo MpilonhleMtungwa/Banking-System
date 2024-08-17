@@ -1,10 +1,6 @@
 // Handle transfer form submission
 function updateBalanceAndTransactions() {
-  fetch("/api/getBalanceAndTransactions", {
-    headers: {
-      Accept: "application/json",
-    },
-  })
+  fetch("/api/getBalanceAndTransactions")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch balance and transactions");
@@ -64,11 +60,7 @@ document
 
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/api/lastWithdrawal", {
-    headers: {
-      Accept: "application/json",
-    },
-  })
+  fetch("/api/lastWithdrawal")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch last withdrawal");
@@ -84,11 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fetch the user balance and display on Balance Card*/
-fetch("/api/user-balance", {
-  headers: {
-    Accept: "application/json",
-  },
-})
+fetch("/api/user-balance")
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("balance").textContent = `R ${data.balance}`;
@@ -96,11 +84,7 @@ fetch("/api/user-balance", {
   .catch((error) => console.error("Error fetching user balance:", error));
 
 /* Transaction list and show only 5 */
-fetch("/api/transactions", {
-  headers: {
-    Accept: "application/json",
-  },
-})
+fetch("/api/transactions")
   .then((response) => response.json())
   .then((data) => {
     const transactionsList = document.querySelector("#transaction-list");

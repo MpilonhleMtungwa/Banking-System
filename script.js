@@ -45,7 +45,7 @@ function myFunction() {
 }
 
 fetch(
-  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/customers"
+  "https://banking-system-1y6z54so9-mpilonhle-s-projects.vercel.app/api/customers"
 )
   .then((response) => response.json())
   .then((data) => {
@@ -82,7 +82,7 @@ document
     const amount = document.querySelector("input[name='amount']").value;
 
     fetch(
-      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transfer",
+      "https://banking-system-1y6z54so9-mpilonhle-s-projects.vercel.app/api/transfer",
       {
         method: "POST",
         headers: {
@@ -102,7 +102,7 @@ document
 
         // Refresh balance and transactions
         fetch(
-          "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/user-balance"
+          "https://banking-system-1y6z54so9-mpilonhle-s-projects.vercel.app/api/user-balance"
         )
           .then((response) => response.json())
           .then((data) => {
@@ -115,7 +115,7 @@ document
           );
 
         fetch(
-          "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transactions"
+          "https://banking-system-1y6z54so9-mpilonhle-s-projects.vercel.app/api/transactions"
         )
           .then((response) => response.json())
           .then((data) => {

@@ -6,7 +6,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://banking-system-eta.vercel.app/", // Allow your frontend origin
+    origin:
+      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/", // Allow your frontend origin
     methods: ["GET", "POST"], // Adjust methods as needed
     credentials: true, // If you need to include cookies or authentication headers
   })

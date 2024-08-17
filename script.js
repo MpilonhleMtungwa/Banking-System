@@ -44,7 +44,9 @@ function myFunction() {
   }
 }
 
-fetch("https://banking-system-eta.vercel.app/api/customers")
+fetch(
+  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/customers"
+)
   .then((response) => response.json())
   .then((data) => {
     const datalist = document.querySelector("#recipients");
@@ -79,13 +81,16 @@ document
       .textContent.split(" for ")[1];
     const amount = document.querySelector("input[name='amount']").value;
 
-    fetch("https://banking-system-eta.vercel.app/api/transfer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ recipientName: customerName, amount: amount }),
-    })
+    fetch(
+      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transfer",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ recipientName: customerName, amount: amount }),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Transfer failed");
@@ -96,7 +101,9 @@ document
         alert(message);
 
         // Refresh balance and transactions
-        fetch("https://banking-system-eta.vercel.app/api/user-balance")
+        fetch(
+          "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/user-balance"
+        )
           .then((response) => response.json())
           .then((data) => {
             document.getElementById(
@@ -107,7 +114,9 @@ document
             console.error("Error fetching user balance:", error)
           );
 
-        fetch("https://banking-system-eta.vercel.app/api/transactions")
+        fetch(
+          "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transactions"
+        )
           .then((response) => response.json())
           .then((data) => {
             const transactionsList =

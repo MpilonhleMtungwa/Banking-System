@@ -32,13 +32,16 @@ document
     const recipientName = document.getElementById("recipientName").value;
     const amount = document.getElementById("amount").value;
 
-    fetch("http://localhost:3000/api/transfer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ recipientName, amount }),
-    })
+    fetch(
+      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transfer",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ recipientName, amount }),
+      }
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Transfer failed");
@@ -60,7 +63,9 @@ document
 
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("http://localhost:3000/api/lastWithdrawal")
+  fetch(
+    "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/lastWithdrawal"
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch last withdrawal");
@@ -76,7 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fetch the user balance and display on Balance Card*/
-fetch("http://localhost:3000/api/user-balance")
+fetch(
+  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/user-balance"
+)
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("balance").textContent = `R ${data.balance}`;
@@ -84,7 +91,9 @@ fetch("http://localhost:3000/api/user-balance")
   .catch((error) => console.error("Error fetching user balance:", error));
 
 /* Transaction list and show only 5 */
-fetch("http://localhost:3000/api/transactions")
+fetch(
+  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transactions"
+)
   .then((response) => response.json())
   .then((data) => {
     const transactionsList = document.querySelector("#transaction-list");

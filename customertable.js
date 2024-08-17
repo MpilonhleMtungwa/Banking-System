@@ -1,4 +1,4 @@
-fetch("https://banking-system-eta.vercel.app/api/customers")
+fetch("/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const tableBody = document.querySelector("#customerTable tbody");

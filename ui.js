@@ -1,6 +1,6 @@
 // Handle transfer form submission
 function updateBalanceAndTransactions() {
-  fetch("https://banking-system-eta.vercel.app/api/getBalanceAndTransactions", {
+  fetch("/api/getBalanceAndTransactions", {
     headers: {
       Accept: "application/json",
     },
@@ -36,7 +36,7 @@ document
     const recipientName = document.getElementById("recipientName").value;
     const amount = document.getElementById("amount").value;
 
-    fetch("https://banking-system-eta.vercel.app/api/transfer", {
+    fetch("/api/transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ document
 
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://banking-system-eta.vercel.app/api/lastWithdrawal", {
+  fetch("/api/lastWithdrawal", {
     headers: {
       Accept: "application/json",
     },
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fetch the user balance and display on Balance Card*/
-fetch("https://banking-system-eta.vercel.app/api/user-balance", {
+fetch("/api/user-balance", {
   headers: {
     Accept: "application/json",
   },
@@ -96,7 +96,7 @@ fetch("https://banking-system-eta.vercel.app/api/user-balance", {
   .catch((error) => console.error("Error fetching user balance:", error));
 
 /* Transaction list and show only 5 */
-fetch("https://banking-system-eta.vercel.app/api/transactions", {
+fetch("/api/transactions", {
   headers: {
     Accept: "application/json",
   },

@@ -32,16 +32,13 @@ document
     const recipientName = document.getElementById("recipientName").value;
     const amount = document.getElementById("amount").value;
 
-    fetch(
-      "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transfer",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ recipientName, amount }),
-      }
-    )
+    fetch("http://localhost:3000/api/transfer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ recipientName, amount }),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Transfer failed");
@@ -63,9 +60,7 @@ document
 
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
-  fetch(
-    "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/lastWithdrawal"
-  )
+  fetch("http://localhost:3000/api/lastWithdrawal")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch last withdrawal");
@@ -81,9 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fetch the user balance and display on Balance Card*/
-fetch(
-  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/user-balance"
-)
+fetch("http://localhost:3000/api/user-balance")
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("balance").textContent = `R ${data.balance}`;
@@ -91,9 +84,7 @@ fetch(
   .catch((error) => console.error("Error fetching user balance:", error));
 
 /* Transaction list and show only 5 */
-fetch(
-  "https://banking-system-git-master-mpilonhle-s-projects.vercel.app/api/transactions"
-)
+fetch("http://localhost:3000/api/transactions")
   .then((response) => response.json())
   .then((data) => {
     const transactionsList = document.querySelector("#transaction-list");

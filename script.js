@@ -44,7 +44,7 @@ function myFunction() {
   }
 }
 
-fetch("/api/customers")
+fetch("http://localhost:3000/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const datalist = document.querySelector("#recipients");
@@ -79,7 +79,7 @@ document
       .textContent.split(" for ")[1];
     const amount = document.querySelector("input[name='amount']").value;
 
-    fetch("/api/transfer", {
+    fetch("http://localhost:3000/api/transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ document
         alert(message);
 
         // Refresh balance and transactions
-        fetch("/api/user-balance")
+        fetch("http://localhost:3000/api/user-balance")
           .then((response) => response.json())
           .then((data) => {
             document.getElementById(
@@ -107,7 +107,7 @@ document
             console.error("Error fetching user balance:", error)
           );
 
-        fetch("/api/transactions")
+        fetch("http://localhost:3000/api/transactions")
           .then((response) => response.json())
           .then((data) => {
             const transactionsList =

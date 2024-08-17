@@ -1,4 +1,4 @@
-fetch("/api/customers")
+fetch("http://localhost:3000/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const tableBody = document.querySelector("#customerTable tbody");

@@ -1,6 +1,6 @@
 // Handle transfer form submission
 function updateBalanceAndTransactions() {
-  fetch("https://banking-system-eta.vercel.app/api/getBalanceAndTransactions")
+  fetch("http://localhost:3000/api/getBalanceAndTransactions")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch balance and transactions");
@@ -32,7 +32,7 @@ document
     const recipientName = document.getElementById("recipientName").value;
     const amount = document.getElementById("amount").value;
 
-    fetch("https://banking-system-eta.vercel.app/api/transfer", {
+    fetch("http://localhost:3000/api/transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ document
         if (!response.ok) {
           throw new Error("Transfer failed");
         }
-        return response.json(); // server returns a JSON response
+        return response.json(); // Assuming your server returns a JSON response
       })
       .then((data) => {
         // Update the Withdraw card
@@ -51,7 +51,7 @@ document
         const withdrawalAmount = -Math.abs(parseFloat(amount)); // Ensure the amount is negative
         withdrawCard.textContent = `R ${withdrawalAmount}`;
 
-        alert(`Transfer successful! Last Withdrawal: ${data.lastWithdrawal}`); // server sends a success message
+        alert(`Transfer successful! Last Withdrawal: ${data.lastWithdrawal}`); // Assuming your server sends a success message
         updateBalanceAndTransactions();
         window.location.reload(); // Refresh balance and transactions
       })
@@ -60,7 +60,7 @@ document
 
 /* Show Withdraw Amount to Card*/
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://banking-system-eta.vercel.app/api/lastWithdrawal")
+  fetch("http://localhost:3000/api/lastWithdrawal")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to fetch last withdrawal");
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* Fetch the user balance and display on Balance Card*/
-fetch("https://banking-system-eta.vercel.app/api/user-balance")
+fetch("http://localhost:3000/api/user-balance")
   .then((response) => response.json())
   .then((data) => {
     document.getElementById("balance").textContent = `R ${data.balance}`;
@@ -84,7 +84,7 @@ fetch("https://banking-system-eta.vercel.app/api/user-balance")
   .catch((error) => console.error("Error fetching user balance:", error));
 
 /* Transaction list and show only 5 */
-fetch("https://banking-system-eta.vercel.app/api/transactions")
+fetch("http://localhost:3000/api/transactions")
   .then((response) => response.json())
   .then((data) => {
     const transactionsList = document.querySelector("#transaction-list");

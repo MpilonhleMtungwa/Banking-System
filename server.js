@@ -2,16 +2,9 @@ const express = require("express");
 const connection = require("./db");
 const cors = require("cors");
 
-/*
-const apiUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://banking-system-eta.vercel.app"
-    : "http://localhost:3000";
-*/
 const app = express();
-/*
 const PORT = 3000;
-*/
+
 app.use(cors());
 app.use(express.json());
 
@@ -195,4 +188,8 @@ app.get("/api/transactions", (req, res) => {
       res.json(results);
     }
   );
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -1,4 +1,4 @@
-fetch("http://localhost:3000/api/customers")
+fetch("https://banking-system-neon-two.vercel.app/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const tableBody = document.querySelector("#customerTable tbody");

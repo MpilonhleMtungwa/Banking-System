@@ -44,7 +44,7 @@ function myFunction() {
   }
 }
 
-fetch("http://localhost:3000/api/customers")
+fetch("https://banking-system-neon-two.vercel.app/api/customers")
   .then((response) => response.json())
   .then((data) => {
     const datalist = document.querySelector("#recipients");
@@ -79,7 +79,7 @@ document
       .textContent.split(" for ")[1];
     const amount = document.querySelector("input[name='amount']").value;
 
-    fetch("http://localhost:3000/api/transfer", {
+    fetch("https://banking-system-neon-two.vercel.app/api/transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ document
         alert(message);
 
         // Refresh balance and transactions
-        fetch("http://localhost:3000/api/user-balance")
+        fetch("https://banking-system-neon-two.vercel.app/api/user-balance")
           .then((response) => response.json())
           .then((data) => {
             document.getElementById(
@@ -107,7 +107,7 @@ document
             console.error("Error fetching user balance:", error)
           );
 
-        fetch("http://localhost:3000/api/transactions")
+        fetch("https://banking-system-neon-two.vercel.app/api/transactions")
           .then((response) => response.json())
           .then((data) => {
             const transactionsList =
@@ -139,7 +139,7 @@ document
     const recipientName = document.getElementById("recipientName").value;
     const amount = document.getElementById("amount").value;
 
-    fetch("http://localhost:3000/api/transfer", {
+    fetch("https://banking-system-neon-two.vercel.app/api/transfer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
